@@ -28,10 +28,10 @@ public class Outer {
         static {
             System.out.println("내부 static 클래스가 초기화 되었습니다.");  // 그래서 지연 로딩이라고 하신듯.
         }
+
         public Inner() {
             System.out.println("Inner가 생성되었습니다.");
         }
-
     }
 
     public class InnerInstanceClass {

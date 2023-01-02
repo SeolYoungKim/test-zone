@@ -2,8 +2,7 @@
 디자인패턴 "싱글톤"을 공부하는 중, InnerClass로 하면 멀티스레드에 안전하다는 말이 나왔다. 그런데, 왜 안전한가? 에 대한 설명이 부족했다. 
 물론, 나의 지식도 부족했다. 그래서 직접 찾아보고 있었다. 원래라면 더 삽질을 했겠지만, 구세주 같은 글을 발견했고, 그 분 덕분에 쉽게 알아볼 수 있었다.  
 
-[해당 링크가 내가 참고한 글이다.](https://kdhyo98.tistory.com/70#static%EC%-D%B-%--%EC%--%AC%EB%-D%BC%EA%B-%--%EB%-A%--%--%EC%-B%-C%EC%A-%--
-)
+[해당 링크가 내가 참고한 글이다.](https://kdhyo98.tistory.com/70#static%EC%-D%B-%--%EC%--%AC%EB%-D%BC%EA%B-%--%EB%-A%--%--%EC%-B%-C%EC%A-%--)
 
 # 테스트 초기에 했던 생각들 
 - class load와 initialization은 다르다.
