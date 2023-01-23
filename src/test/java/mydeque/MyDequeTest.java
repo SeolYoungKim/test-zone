@@ -3,6 +3,7 @@ package mydeque;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.Objects;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -80,6 +81,19 @@ public class MyDequeTest {
             assertThat(myDeque.size()).isEqualTo(2);
         }
 
+        @DisplayName("getFirst()로 하나의 요소가 들어있는 MyDeque의 요소를 가져와도 문제 없다.")
+        @Test
+        void getFirstOnlyOneElement() {
+            final MyDeque<Integer> myDequeOnlyOneElem = new MyDeque<>();
+            myDequeOnlyOneElem.addFirst(1);
+
+            final Integer firstValue = myDequeOnlyOneElem.getFirst();
+            assertThat(firstValue).isEqualTo(1);
+            assertThat(myDequeOnlyOneElem.first).isNull();
+            assertThat(myDequeOnlyOneElem.last).isNull();
+            assertThat(myDequeOnlyOneElem.size()).isEqualTo(0);
+        }
+
         @DisplayName("getFirst()로 없는 것을 조회할 경우 NullPointerException을 던진다.")
         @Test
         void getFirstFail() {
@@ -97,6 +111,19 @@ public class MyDequeTest {
             assertThat(myDeque.first.value).isEqualTo(1);
             assertThat(myDeque.last.value).isEqualTo(2);
             assertThat(myDeque.size()).isEqualTo(2);
+        }
+
+        @DisplayName("getFirst()로 하나의 요소가 들어있는 MyDeque의 요소를 가져와도 문제 없다.")
+        @Test
+        void getLastOnlyOneElement() {
+            final MyDeque<Integer> myDequeOnlyOneElem = new MyDeque<>();
+            myDequeOnlyOneElem.addFirst(1);
+
+            final Integer lastValue = myDequeOnlyOneElem.getLast();
+            assertThat(lastValue).isEqualTo(1);
+            assertThat(myDequeOnlyOneElem.first).isNull();
+            assertThat(myDequeOnlyOneElem.last).isNull();
+            assertThat(myDequeOnlyOneElem.size()).isEqualTo(0);
         }
 
         @DisplayName("getLast()로 없는 것을 조회할 경우 NullPointerException을 던진다.")
@@ -189,6 +216,19 @@ public class MyDequeTest {
             public Node(E value) {
                 this.value = value;
             }
+
+            @Override
+            public boolean equals(final Object o) {
+                if (this == o) {
+                    return true;
+                }
+                if (o == null || getClass() != o.getClass()) {
+                    return false;
+                }
+                final Node<?> node = (Node<?>) o;
+                return Objects.equals(value, node.value) && Objects.equals(prev, node.prev)
+                        && Objects.equals(next, node.next);
+            }
         }
 
         public void addFirst(E e) {
@@ -231,6 +271,10 @@ public class MyDequeTest {
                 throw new NullPointerException();
             }
 
+            if (first.equals(last)) {
+                return getValueForOnlyOneNode();
+            }
+
             Node<E> firstNode = first;
             Node<E> nextNode = first.next;
 
@@ -242,9 +286,21 @@ public class MyDequeTest {
             return firstNode.value;
         }
 
+        private E getValueForOnlyOneNode() {
+            E value = first.value;
+            first = null;
+            last = null;
+            size--;
+            return value;
+        }
+
         public E getLast() {
             if (last == null) {
                 throw new NullPointerException();
+            }
+
+            if (first.equals(last)) {
+                return getValueForOnlyOneNode();
             }
 
             Node<E> lastNode = last;
