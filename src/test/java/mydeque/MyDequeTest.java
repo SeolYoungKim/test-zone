@@ -1,6 +1,7 @@
 package mydeque;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -79,6 +80,14 @@ public class MyDequeTest {
             assertThat(myDeque.size()).isEqualTo(2);
         }
 
+        @DisplayName("getFirst()로 없는 것을 조회할 경우 NullPointerException을 던진다.")
+        @Test
+        void getFirstFail() {
+            final MyDeque<Integer> emptyDeque = new MyDeque<>();
+            assertThatThrownBy(emptyDeque::getFirst)
+                    .isInstanceOf(NullPointerException.class);
+        }
+
         @DisplayName("getLast()로 요소를 가져오면, 마지막에 참조했던 값이 사라짐")
         @Test
         void getLast() {
@@ -88,6 +97,14 @@ public class MyDequeTest {
             assertThat(myDeque.first.value).isEqualTo(1);
             assertThat(myDeque.last.value).isEqualTo(2);
             assertThat(myDeque.size()).isEqualTo(2);
+        }
+
+        @DisplayName("getLast()로 없는 것을 조회할 경우 NullPointerException을 던진다.")
+        @Test
+        void getLastFail() {
+            final MyDeque<Integer> emptyDeque = new MyDeque<>();
+            assertThatThrownBy(emptyDeque::getLast)
+                    .isInstanceOf(NullPointerException.class);
         }
     }
 
@@ -115,6 +132,14 @@ public class MyDequeTest {
             assertThat(myDeque.size()).isEqualTo(3);
         }
 
+        @DisplayName("peekFirst()로 없는 것을 조회할 경우 NullPointerException을 던진다.")
+        @Test
+        void peekFirstFail() {
+            final MyDeque<Integer> emptyDeque = new MyDeque<>();
+            assertThatThrownBy(emptyDeque::peekFirst)
+                    .isInstanceOf(NullPointerException.class);
+        }
+
         @DisplayName("peekLast()를 할 경우 가장 마지막의 값을 조회하고, MyDeque에는 아무런 영향이 없다.")
         @Test
         void peekLast() {
@@ -124,6 +149,14 @@ public class MyDequeTest {
             assertThat(myDeque.first.value).isEqualTo(1);
             assertThat(myDeque.last.value).isEqualTo(3);
             assertThat(myDeque.size()).isEqualTo(3);
+        }
+
+        @DisplayName("peekLast()로 없는 것을 조회할 경우 NullPointerException을 던진다.")
+        @Test
+        void peekLastFail() {
+            final MyDeque<Integer> emptyDeque = new MyDeque<>();
+            assertThatThrownBy(emptyDeque::peekLast)
+                    .isInstanceOf(NullPointerException.class);
         }
     }
 
@@ -194,6 +227,10 @@ public class MyDequeTest {
         }
 
         public E getFirst() {
+            if (first == null) {
+                throw new NullPointerException();
+            }
+
             Node<E> firstNode = first;
             Node<E> nextNode = first.next;
 
@@ -206,6 +243,10 @@ public class MyDequeTest {
         }
 
         public E getLast() {
+            if (last == null) {
+                throw new NullPointerException();
+            }
+
             Node<E> lastNode = last;
             Node<E> prevNode = last.prev;
 
@@ -219,10 +260,18 @@ public class MyDequeTest {
 
 
         public E peekFirst() {
+            if (first == null) {
+                throw new NullPointerException();
+            }
+
             return first.value;
         }
 
         public E peekLast() {
+            if (last == null) {
+                throw new NullPointerException();
+            }
+
             return last.value;
         }
 
