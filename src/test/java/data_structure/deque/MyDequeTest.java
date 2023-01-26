@@ -1,4 +1,4 @@
-package mydeque;
+package data_structure.deque;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
