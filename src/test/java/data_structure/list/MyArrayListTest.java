@@ -22,7 +22,7 @@ public class MyArrayListTest {
     }
 
     static class DefaultMyArrayList<E> implements MyArrayList<E> {
-        private static final int DEFAULT_SIZE = 8;
+        private static final int DEFAULT_SIZE = 10;
 
         private Object[] values;
         private int idx;
@@ -70,11 +70,8 @@ public class MyArrayListTest {
 
         @Override
         public void delete(final int idx) {
-            final Object[] newArr = new Object[values.length];
-            System.arraycopy(values, 0, newArr, 0, idx);
-            System.arraycopy(values, idx + 1, newArr, idx, values.length - idx - 1);
-
-            values = newArr;
+            System.arraycopy(values, idx + 1, values, idx, values.length - 1 - idx);
+            values[values.length - 1] = null;
             size--;
         }
 

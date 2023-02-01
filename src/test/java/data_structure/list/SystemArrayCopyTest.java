@@ -57,4 +57,15 @@ public class SystemArrayCopyTest {
         System.arraycopy(numbers, idx + 1, copiedNumbers, idx, numbers.length - idx - 1);
         System.out.println(Arrays.toString(copiedNumbers));
     }
+
+    @DisplayName("삭제 구현2")
+    @Test
+    void systemArrayCopyLearningTest6() {
+        int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int idx = 4;
+
+        System.arraycopy(numbers, idx + 1, numbers, idx, numbers.length - 1 - idx);
+        numbers[numbers.length - 1] = 0;
+        System.out.println(Arrays.toString(numbers));
+    }
 }

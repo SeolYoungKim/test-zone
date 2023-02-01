@@ -102,7 +102,6 @@ public class MyLinkedListTest {
 
                     node.prev = null;
                     node.next = null;
-                    node = null;
 
                     break;
                 }
