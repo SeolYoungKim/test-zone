@@ -1,6 +1,7 @@
 package data_structure.stack;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -119,6 +120,13 @@ public class MyStackTest {
         assertThat(defaultMyStack.size()).isEqualTo(0);
     }
 
+    @DisplayName("아무것도 없는데 pop()을 사용하면 NullPointerException 발생")
+    @Test
+    void popFailTest() {
+        assertThatThrownBy(() -> defaultMyStack.pop())
+                .isInstanceOf(NullPointerException.class);
+    }
+
     @DisplayName("peek 테스트")
     @Test
     void peekTest() {
@@ -128,6 +136,13 @@ public class MyStackTest {
         assertThat(defaultMyStack.peek()).isEqualTo(2);
         assertThat(defaultMyStack.pointer).isEqualTo(1);
         assertThat(defaultMyStack.size()).isEqualTo(2);
+    }
+
+    @DisplayName("아무것도 없는데 peek()을 사용하면 NullPointerException 발생")
+    @Test
+    void peekFailTest() {
+        assertThatThrownBy(() -> defaultMyStack.peek())
+                .isInstanceOf(NullPointerException.class);
     }
 
     @DisplayName("empty true")
