@@ -1,5 +1,11 @@
 package data_structure.list;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 public class MyLinkedListTest {
     interface MyLinkedList<E> {
         void add(E e);  // 끝에 추가
@@ -98,7 +104,10 @@ public class MyLinkedListTest {
                     final Node<E> next = node.next;
 
                     prev.next = next;
-                    next.prev = prev;
+
+                    if (next != null) {
+                        next.prev = prev;
+                    }
 
                     node.prev = null;
                     node.next = null;
@@ -106,6 +115,8 @@ public class MyLinkedListTest {
                     break;
                 }
             }
+
+            size--;
         }
 
         @Override
@@ -114,4 +125,59 @@ public class MyLinkedListTest {
         }
     }
 
+    // 테스트
+    public static DefaultMyLinkedList<Integer> myLinkedList;
+
+    @BeforeEach
+    void setUp() {
+        myLinkedList = new DefaultMyLinkedList<>();
+    }
+
+    @DisplayName("값 추가 테스트")
+    @Test
+    void addTest() {
+        myLinkedList.add(1);
+        myLinkedList.add(2);
+
+        assertThat(myLinkedList.size()).isEqualTo(2);
+        assertThat(myLinkedList.first.value).isEqualTo(1);
+        assertThat(myLinkedList.first.next.value).isEqualTo(2);
+    }
+
+    @DisplayName("값 가져오기 테스트")
+    @Test
+    void getTest() {
+        myLinkedList.add(1);
+        myLinkedList.add(2);
+        myLinkedList.add(3);
+
+        assertThat(myLinkedList.get(0)).isEqualTo(1);
+        assertThat(myLinkedList.get(1)).isEqualTo(2);
+        assertThat(myLinkedList.get(2)).isEqualTo(3);
+    }
+
+    @DisplayName("값 수정 테스트")
+    @Test
+    void setTest() {
+        myLinkedList.add(1);
+        myLinkedList.add(2);
+
+        myLinkedList.set(0, 100);
+        myLinkedList.set(1, 200);
+
+        assertThat(myLinkedList.first.value).isEqualTo(100);
+        assertThat(myLinkedList.first.next.value).isEqualTo(200);
+    }
+
+    @DisplayName("값 삭제 테스트")
+    @Test
+    void removeTest() {
+        myLinkedList.add(1);
+        myLinkedList.add(2);
+
+        myLinkedList.remove(2);
+
+        assertThat(myLinkedList.size()).isEqualTo(1);
+        assertThat(myLinkedList.first.value).isEqualTo(1);
+    }
 }

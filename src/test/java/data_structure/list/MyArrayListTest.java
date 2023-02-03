@@ -82,7 +82,7 @@ public class MyArrayListTest {
     }
 
     // 테스트
-    public static final int DEFAULT_SIZE = 8;
+    public static final int DEFAULT_SIZE = 10;
     private DefaultMyArrayList<Integer> myArrayList;
 
     @BeforeEach
