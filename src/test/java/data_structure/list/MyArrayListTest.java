@@ -19,6 +19,8 @@ public class MyArrayListTest {
         void delete(int idx);
 
         int size();
+
+        boolean isEmpty();
     }
 
     static class DefaultMyArrayList<E> implements MyArrayList<E> {
@@ -78,6 +80,11 @@ public class MyArrayListTest {
         @Override
         public int size() {
             return size;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return size == 0;
         }
     }
 
@@ -145,4 +152,18 @@ public class MyArrayListTest {
         myArrayList.delete(1);
         assertThat(myArrayList.size()).isEqualTo(1);
     }
+
+    @DisplayName("isEmpty true")
+    @Test
+    void isEmptyTestTrue() {
+        assertThat(myArrayList.isEmpty()).isTrue();
+    }
+
+    @DisplayName("isEmpty false")
+    @Test
+    void isEmptyTestFalse() {
+        myArrayList.add(1);
+        assertThat(myArrayList.isEmpty()).isFalse();
+    }
+
 }

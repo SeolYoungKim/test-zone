@@ -17,6 +17,8 @@ public class MyLinkedListTest {
         void remove(E e);
 
         int size();
+
+        boolean isEmpty();
     }
 
     static class DefaultMyLinkedList<E> implements MyLinkedList<E> {
@@ -123,6 +125,11 @@ public class MyLinkedListTest {
         public int size() {
             return size;
         }
+
+        @Override
+        public boolean isEmpty() {
+            return size == 0;
+        }
     }
 
     // 테스트
@@ -179,5 +186,17 @@ public class MyLinkedListTest {
 
         assertThat(myLinkedList.size()).isEqualTo(1);
         assertThat(myLinkedList.first.value).isEqualTo(1);
+    }
+
+    @DisplayName("isEmpty true")
+    @Test
+    void isEmptyTrue() {
+        assertThat(myLinkedList.isEmpty()).isTrue();
+    }
+
+    @DisplayName("isEmpty false")
+    @Test
+    void isEmptyFalse() {
+        assertThat(myLinkedList.isEmpty()).isFalse();
     }
 }
