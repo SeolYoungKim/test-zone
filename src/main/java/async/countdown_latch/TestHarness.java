@@ -1,4 +1,4 @@
-package countdown_latch;
+package async.countdown_latch;
 
 import java.util.concurrent.CountDownLatch;
 
