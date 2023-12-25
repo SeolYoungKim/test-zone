@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
@@ -21,5 +22,20 @@ public class TestFor {
         for (Integer number : numbers) {
             System.out.println(number);
         }
+    }
+
+    record TestClass(int a, int b) {
+    }
+    @Test
+    void nam2e() {
+        TestClass testClass1 = new TestClass(1, 2);
+        TestClass testClass2 = new TestClass(1, 2);
+
+        ArrayList<TestClass> testClasses = new ArrayList<>();
+        testClasses.add(testClass1);
+        testClasses.add(testClass2);
+
+        testClasses.forEach(tc -> System.out.println("hashCode() = " + tc.hashCode()));
+        System.out.println(testClass1 == testClass2);
     }
 }
