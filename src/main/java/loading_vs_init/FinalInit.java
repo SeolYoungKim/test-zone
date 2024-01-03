@@ -25,5 +25,8 @@ public class FinalInit {
 
         local = param;
         System.out.println("local = " + local);
+
+        final String str;
+        final FinalInit finalInit;
     }
 }
