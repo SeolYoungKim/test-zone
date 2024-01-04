@@ -50,7 +50,7 @@ public class EncodingDecodingTest {
 
     @DisplayName("유니코드 CodePoint를 이용해서 String을 생성할 수 있다.")
     @Test
-    void name() {
+    void codePoint() {
         // given
         int[] codePoints = {0x1F600, 0x1F601, 0x1F602, 0x1F603};
 
@@ -59,6 +59,20 @@ public class EncodingDecodingTest {
 
         // then
         assertThat(str).isEqualTo("😀😁😂😃");
+    }
+
+    @DisplayName("String 동등성 테스트")
+    @Test
+    void equivalence() {
+        // given
+        String str1 = "안녕하세요";
+        String str2 = "안녕하세요";
+        String str3 = new String("안녕하세요");
+
+        // when
+        // then
+        assertThat(str1).isSameAs(str2);
+        assertThat(str1).isNotSameAs(str3);
     }
 
     @DisplayName("Base64 인코딩/디코딩 테스트")
