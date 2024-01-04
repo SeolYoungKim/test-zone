@@ -48,6 +48,19 @@ public class EncodingDecodingTest {
         assertThat(third3Bytes).isEqualTo("하");
     }
 
+    @DisplayName("유니코드 CodePoint를 이용해서 String을 생성할 수 있다.")
+    @Test
+    void name() {
+        // given
+        int[] codePoints = {0x1F600, 0x1F601, 0x1F602, 0x1F603};
+
+        // when
+        String str = new String(codePoints, 0, codePoints.length);
+
+        // then
+        assertThat(str).isEqualTo("😀😁😂😃");
+    }
+
     @DisplayName("Base64 인코딩/디코딩 테스트")
     @Test
     void base64Test() {
