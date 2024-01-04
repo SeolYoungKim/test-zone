@@ -25,6 +25,29 @@ public class EncodingDecodingTest {
         assertThat(str).isEqualTo(decodedStr);
     }
 
+    @DisplayName("일부만 디코딩할 수 있다. (한글의 한 글자는 3byte를 차지한다.)")
+    @Test
+    void stringDecodingTest2() {
+        // given
+        String str = "안녕하세요";
+        byte[] encodedStr = str.getBytes(Charset.defaultCharset());  // 인코딩한 바이트 시퀀스
+
+        // when
+        String first3Bytes = new String(encodedStr, 0, 3);  // 0번째부터 3개의 바이트만 디코딩
+        System.out.println("first3Bytes = " + first3Bytes);
+
+        String second3Bytes = new String(encodedStr, 3, 3);  // 3번째부터 3개의 바이트만 디코딩
+        System.out.println("second3Bytes = " + second3Bytes);
+
+        String third3Bytes = new String(encodedStr, 6, 3);  // 6번째부터 3개의 바이트만 디코딩
+        System.out.println("third3Bytes = " + third3Bytes);
+
+        // then
+        assertThat(first3Bytes).isEqualTo("안");
+        assertThat(second3Bytes).isEqualTo("녕");
+        assertThat(third3Bytes).isEqualTo("하");
+    }
+
     @DisplayName("Base64 인코딩/디코딩 테스트")
     @Test
     void base64Test() {
