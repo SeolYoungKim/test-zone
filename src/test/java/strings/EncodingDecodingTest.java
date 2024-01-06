@@ -3,6 +3,8 @@ package strings;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Base64;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -96,5 +98,26 @@ public class EncodingDecodingTest {
 
         System.out.println("decodedBase64DecodedStr = " + decodedBase64DecodedStr);
         assertThat(decodedBase64DecodedStr).isEqualTo(안녕하세요);
+    }
+
+    @DisplayName("UTF-8과 UTF-16은 서로 다른 byte 배열을 생성한다.")
+    @Test
+    void utf8_utf16() {
+        // given
+        String 느낌표 = "A";
+
+        Charset utf8 = StandardCharsets.UTF_8;
+        Charset utf16 = StandardCharsets.UTF_16;
+
+        // when
+        byte[] utf8Bytes = 느낌표.getBytes(utf8);
+        byte[] utf16Bytes = 느낌표.getBytes(utf16);
+
+        // then
+        System.out.println("utf8Bytes = " + Arrays.toString(utf8Bytes));
+        System.out.println("utf8Bytes = " + utf8Bytes.length);
+
+        System.out.println("utf16Bytes = " + Arrays.toString(utf16Bytes));
+        System.out.println("utf16Bytes = " + utf16Bytes.length);
     }
 }
