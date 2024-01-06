@@ -42,8 +42,8 @@ public class ObjectMemoryTest {
 
     static class TestClass {
         private final String id;
-        private final String title = "titletitletitletitletitletitletitletitletitletitletitletitletitletitletitle";
-        private final String content = "contentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontent";
+        private final String title = "제목제목제제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목목";
+        private final String content = "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용";
         private final String authors = "author1,author2,author3,author4";
         private final String tags = "tag1,tag2,tag3,tag4,tag5,tag6,tag7,tag8,tag9,tag10";
         private final String category = "category";
