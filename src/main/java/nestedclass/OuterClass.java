@@ -5,7 +5,17 @@ public class OuterClass {
 
     private final int outerField = 10;
 
+    // static nested class는 static이기 때문에 OuterClass 또한 StaticNestedClass의 static 필드만 참조할 수 있다.
+    void staticNestedClass() {
+        // System.out.println(staticNestedField);  // OuterClass는 static nested class의 인스턴스 필드를 참조할 수 없다.
+        System.out.println(StaticNestedClass.staticNestedStaticField);
+    }
+
     static class StaticNestedClass {
+        private static final int staticNestedStaticField = 10;
+
+        private final int staticNestedField = 10;
+
         public StaticNestedClass() {
             System.out.println(outerStaticField);
             // System.out.println(outerField);  // outerField는 static이 아니기 때문에 참조할 수 없다.
