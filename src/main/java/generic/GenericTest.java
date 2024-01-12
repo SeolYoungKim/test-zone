@@ -10,6 +10,31 @@ import lombok.Setter;
 public class GenericTest<T> {
     private T t;
 
+    public void print(List<T> list) {
+        System.out.println(list);
+    }
+
+    public void printWildCardList(List<?> list) {
+        System.out.println(list);
+    }
+
+    public void printNumberList(List<? extends Number> list) {
+        System.out.println(list);
+    }
+
+    // 제네릭 메서드의 제네릭 선언은 메서드의 반환 타입 앞에 위치한다.
+    // 그래서 extends 선언은 선언부에 작성해야 한다. 파라미터는 선언된 제네릭을 사용하는 부분이다.
+    public <E extends Number> void printOtherGeneric(List<E> e) {
+    }
+
+    // 안됨
+//    public <E> void printOtherGeneric(List<E extends Number> e) {
+//    }
+
+    // 안됨
+//    public <? extends Number> void printOtherGeneric2(List<? extends Number> e) {
+//    }
+
     public static void main(String[] args) {
         GenericTest<String> genericTest1 = new GenericTest<>();
         GenericTest<Integer> genericTest2 = new GenericTest<>();
@@ -35,5 +60,30 @@ public class GenericTest<T> {
         // 컴파일 에러
 //        strings.add(1);
 //        strings.add(true);
+
+        List<Integer> integers = new ArrayList<>();
+        integers.add(1);
+
+        List<?> wildCardList = new ArrayList<>();
+        wildCardList.add(null);
+        // 컴파일 에러
+//        wildCardList.add("Hello");
+//        wildCardList.add(1);
+//        wildCardList.add(true);
+
+        genericTest1.print(strings);
+
+        genericTest1.printWildCardList(strings);
+        genericTest1.printWildCardList(integers);
+        genericTest1.printWildCardList(wildCardList);
+
+        genericTest1.printNumberList(integers);
+
+        // 컴파일 에러
+//        genericTest1.print(wildCardList);
+//        genericTest1.print(integers);
+//        genericTest1.printNumberList(strings);
+
+
     }
 }
