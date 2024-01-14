@@ -2,6 +2,7 @@ package generic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +25,8 @@ public class GenericTest<T> {
 
     // 제네릭 메서드의 제네릭 선언은 메서드의 반환 타입 앞에 위치한다.
     // 그래서 extends 선언은 선언부에 작성해야 한다. 파라미터는 선언된 제네릭을 사용하는 부분이다.
-    public <E extends Number> void printOtherGeneric(List<E> e) {
+    public <E extends Number> void printOtherGeneric(List<E> list, E e) {
+        list.add(e);
     }
 
     // 안됨
@@ -85,5 +87,22 @@ public class GenericTest<T> {
 //        genericTest1.printNumberList(strings);
 
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        GenericTest<?> that = (GenericTest<?>) o;
+        return Objects.equals(t, that.t);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(t);
     }
 }
