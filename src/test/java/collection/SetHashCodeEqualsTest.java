@@ -23,6 +23,7 @@ public class SetHashCodeEqualsTest {
 
         // then
         assertThat(set).hasSize(2);
+        assertThat(set.contains(new OnlySameHashCode(1))).isFalse();  // 의도와는 다르게 동작한다. id가 같아도 equals가 달라 false가 반환된다.
     }
 
     @DisplayName("HashCode와 Equals가 모두 구현돼야 두 객체가 서로 같은 객체로 취급되어 Set에 하나만 저장된다.")
@@ -39,6 +40,7 @@ public class SetHashCodeEqualsTest {
 
         // then
         assertThat(set).hasSize(1);
+        assertThat(set.contains(new SameHashCodeAndEquals(1))).isTrue();  // 의도대로 동작한다. id가 같고 equals도 같아 true가 반환된다.
     }
 
     private static class OnlySameHashCode {
