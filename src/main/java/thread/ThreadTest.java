@@ -1,13 +1,10 @@
 package thread;
 
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ThreadTest {
     public static void main(String[] args) throws InterruptedException {
-        CountDownLatch countDownLatch = new CountDownLatch(10);
-
         ExecutorService threadPool1 = Executors.newFixedThreadPool(10);
         ExecutorService threadPool2 = Executors.newFixedThreadPool(10);
         for (int i = 0; i < 10; i++) {
@@ -35,6 +32,21 @@ public class ThreadTest {
         System.out.println("메인스레드그룹의 부모 = " + parent.getName());
         System.out.println("메인스레드그룹의 부모의 부모 = " + parent.getParent());
 
-//        countDownLatch.await();
+        new InfiniteLoopThread().start();
+    }
+
+    static class InfiniteLoopThread extends Thread {
+        @Override
+        public void run() {
+            while (true) {
+                try {
+                    System.out.println("현재스레드 = " + Thread.currentThread().getName());
+                    System.out.println(System.nanoTime());
+                    Thread.sleep(1000);  // 스레드를 재워버려서 while문이 필요 없지 않나.. 수행중에 현재 스레드를 재우는데...
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 }
