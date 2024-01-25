@@ -21,7 +21,7 @@ public class FileTest {
         FilenameFilter filenameFilter = (dir, name) -> name.endsWith(".java");
 
         // JDK7 이상부터는 java.nio.file.Files를 사용하는게 더 효과적임
-        List<Path> paths = Files.list(Path.of("/Users/seolyoungkim/Desktop/study/test-zone/test-zone/src/main"))
+        List<Path> paths = Files.list(Path.of(""))
                 .toList();
 
         System.out.println(paths);
@@ -31,5 +31,9 @@ public class FileTest {
             System.out.println(path.getRoot());
             System.out.println(path.getParent());
         }
+
+        File file = new File("");
+        file.mkdir();  // ../test1/test2 -> 생성안함 | ../test1 -> 생성
+        file.mkdirs(); // ../test1/test2 -> 전부 생성
     }
 }
