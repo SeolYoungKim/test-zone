@@ -17,7 +17,7 @@ public class SerialTest {
         private static final long serialVersionUID = 1L;
 
         private final String JOB = "🐶발자";
-        private String name;
+        transient private String name;
         private int age;
         private String address;
 
