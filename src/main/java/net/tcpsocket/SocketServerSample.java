@@ -1,4 +1,4 @@
-package net.socket;
+package net.tcpsocket;
 
 import java.io.BufferedReader;
 import java.io.IOException;
